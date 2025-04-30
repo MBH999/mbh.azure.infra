@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "this" {
-  name     = "rg-net-mbh-01"
+  name     = "rg-mbh-net-01"
   location = "uksouth"
 }
 
