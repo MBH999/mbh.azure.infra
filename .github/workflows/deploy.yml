@@ -53,6 +53,8 @@ jobs:
             --changed \
             -- \
             terraform init
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Apply planned changes on changed stacks
         if: steps.list.outputs.stdout
@@ -63,3 +65,5 @@ jobs:
             --changed \
             -- \
             terraform apply -input=false -auto-approve -lock-timeout=5m
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
