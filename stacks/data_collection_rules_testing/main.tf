@@ -42,6 +42,7 @@ resource "azurerm_linux_virtual_machine" "test1" {
   size = "Standard_B2pts_v2"
   admin_username = "azureuser"
   admin_password = random_password.admin_password.result
+  disable_password_authentication = false
   network_interface_ids = [azurerm_network_interface.this.id]
   os_disk {
     caching = "ReadWrite"
