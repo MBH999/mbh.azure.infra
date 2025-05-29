@@ -24,7 +24,7 @@ resource "azurerm_subnet" "this" {
 }
 
 resource "azurerm_network_interface" "this" {
-  name                = "aznic-dcr-test"
+  name                = "nic-azvm-lin-dcr-test1"
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
 
@@ -45,6 +45,7 @@ resource "azurerm_linux_virtual_machine" "test1" {
   disable_password_authentication = false
   network_interface_ids           = [azurerm_network_interface.this.id]
   os_disk {
+    name = "osdisk-azvm-lin-dcr-test1"
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
