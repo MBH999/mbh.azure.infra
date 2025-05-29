@@ -4,8 +4,8 @@ resource "azurerm_resource_group" "this" {
 }
 
 resource "random_password" "admin_password" {
-  length  = 16
-  special = true
+  length           = 16
+  special          = true
   override_special = "!@#$%^&*()_+"
 }
 
@@ -36,16 +36,16 @@ resource "azurerm_network_interface" "this" {
 }
 
 resource "azurerm_linux_virtual_machine" "test1" {
-  name = "azvm-lin-dcr-test1"
-  resource_group_name = azurerm_resource_group.this.name
-  location = azurerm_resource_group.this.location
-  size = "Standard_B2pts_v2"
-  admin_username = "azureuser"
-  admin_password = random_password.admin_password.result
+  name                            = "azvm-lin-dcr-test1"
+  resource_group_name             = azurerm_resource_group.this.name
+  location                        = azurerm_resource_group.this.location
+  size                            = "Standard_B2pts_v2"
+  admin_username                  = "azureuser"
+  admin_password                  = random_password.admin_password.result
   disable_password_authentication = false
-  network_interface_ids = [azurerm_network_interface.this.id]
+  network_interface_ids           = [azurerm_network_interface.this.id]
   os_disk {
-    caching = "ReadWrite"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {
@@ -57,9 +57,9 @@ resource "azurerm_linux_virtual_machine" "test1" {
 }
 
 resource "azurerm_log_analytics_workspace" "this" {
-  name = "law-dcr-test"
-  location = azurerm_resource_group.this.location
+  name                = "law-dcr-test"
+  location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
-  sku = "PerGB2018"
-  retention_in_days = 7
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
 }
